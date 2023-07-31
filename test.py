@@ -1,8 +1,10 @@
 import json
 
-def build_tree(data, root):
-    if "oid" not in data[root]:
+def build_tree(data, root, processed=set()):
+    if root in processed or "oid" not in data[root]:
         return None
+
+    processed.add(root)
 
     tree = {
         "name": data[root].get("name", ""),
@@ -13,7 +15,7 @@ def build_tree(data, root):
 
     for key, value in data.items():
         if key != root and value.get("oid", "").startswith(data[root]["oid"]) and value["oid"][len(data[root]["oid"])] == ".":
-            subtree = build_tree(data, key)
+            subtree = build_tree(data, key, processed)
             if subtree is not None:
                 tree["children"].append(subtree)
 
@@ -28,7 +30,7 @@ data_json = data_json.replace("\\", "")
 data = json.loads(data_json)
 
 # Define the root node (can be any of the keys in the dictionary)
-root_node = "wndDeviceIds"
+root_node = "hpe"
 
 # Build the tree
 tree = build_tree(data, root_node)
