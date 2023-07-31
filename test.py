@@ -12,14 +12,16 @@ def build_tree(data, root, processed=set()):
         "class": data[root].get("class", ""),
         "children": []
     }
+    ignored_objects = []
 
     for key, value in data.items():
         if key != root and value.get("oid", "").startswith(data[root]["oid"]) and value["oid"][len(data[root]["oid"])] == ".":
             subtree = build_tree(data, key, processed)
             if subtree is not None:
                 tree["children"].append(subtree)
-
-    return tree
+        if "oid" not in value:
+            ignored_objects.append(value)
+    return tree, ignored_objects
 
 input_file = "ARUBAWIRED-NETWORKING-OID.json"
 with open(input_file, "r") as file:
@@ -32,12 +34,13 @@ data = json.loads(data_json)
 # Define the root node (can be any of the keys in the dictionary)
 root_node = "hpe"
 
-# Build the tree
-tree = build_tree(data, root_node)
+# Build the tree and get the ignored objects
+tree, ignored_objects = build_tree(data, root_node)
 
 # Prepare the result
 result = {
-    "tree": tree
+    "tree": tree,
+    "ignored_objects": ignored_objects
 }
 
 # Convert the result to JSON
