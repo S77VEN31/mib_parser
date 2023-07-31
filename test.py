@@ -1,5 +1,5 @@
 import json
-
+ignored_objects = []
 def build_tree(data, root, processed=set()):
     if root in processed or "oid" not in data[root]:
         return None
@@ -12,16 +12,16 @@ def build_tree(data, root, processed=set()):
         "class": data[root].get("class", ""),
         "children": []
     }
-    ignored_objects = []
+    
 
     for key, value in data.items():
         if key != root and value.get("oid", "").startswith(data[root]["oid"]) and value["oid"][len(data[root]["oid"])] == ".":
             subtree = build_tree(data, key, processed)
             if subtree is not None:
                 tree["children"].append(subtree)
-        if "oid" not in value:
+        if "oid" not in value and value not in ignored_objects:  # Check if value is not already in ignored_objects
             ignored_objects.append(value)
-    return tree, ignored_objects
+    return tree
 
 input_file = "ARUBAWIRED-NETWORKING-OID.json"
 with open(input_file, "r") as file:
@@ -35,7 +35,7 @@ data = json.loads(data_json)
 root_node = "hpe"
 
 # Build the tree and get the ignored objects
-tree, ignored_objects = build_tree(data, root_node)
+tree = build_tree(data, root_node)
 
 # Prepare the result
 result = {
