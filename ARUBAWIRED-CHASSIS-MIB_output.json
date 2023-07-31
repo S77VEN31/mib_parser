@@ -1,0 +1,74 @@
+{
+  "tree": {
+    "name": "arubaWiredChassisMIB",
+    "oid": "1.3.6.1.4.1.47196.4.1.1.3.11",
+    "class": "moduleidentity",
+    "children": [
+      {
+        "name": "arubaWiredPowerSupply",
+        "oid": "1.3.6.1.4.1.47196.4.1.1.3.11.2",
+        "class": "objectidentity",
+        "children": []
+      },
+      {
+        "name": "arubaWiredTempSensor",
+        "oid": "1.3.6.1.4.1.47196.4.1.1.3.11.3",
+        "class": "objectidentity",
+        "children": []
+      },
+      {
+        "name": "arubaWiredFanTray",
+        "oid": "1.3.6.1.4.1.47196.4.1.1.3.11.4",
+        "class": "objectidentity",
+        "children": []
+      },
+      {
+        "name": "arubaWiredFan",
+        "oid": "1.3.6.1.4.1.47196.4.1.1.3.11.5",
+        "class": "objectidentity",
+        "children": []
+      }
+    ]
+  },
+  "ignored": [
+    {
+      "class": "imports",
+      "ARUBAWIRED-NETWORKING-OID": [
+        "wndFeatures"
+      ],
+      "SNMPv2-CONF": [
+        "NOTIFICATION-GROUP",
+        "MODULE-COMPLIANCE"
+      ],
+      "SNMPv2-SMI": [
+        "OBJECT-IDENTITY",
+        "Counter64",
+        "MibIdentifier",
+        "TimeTicks",
+        "NOTIFICATION-TYPE",
+        "iso",
+        "IpAddress",
+        "Counter32",
+        "Bits",
+        "OBJECT-TYPE",
+        "Integer32",
+        "Unsigned32",
+        "Gauge32",
+        "MODULE-IDENTITY"
+      ],
+      "SNMPv2-TC": [
+        "TEXTUAL-CONVENTION",
+        "DisplayString"
+      ]
+    },
+    {
+      "comments": [
+        "ASN.1 source file://.ARUBAWIRED-CHASSIS-MIB.mib",
+        "Produced by pysmi-0.3.4 at Sun Jul 30 15:50:31 2023",
+        "On host ? platform ? version ? by user ?",
+        "Using Python version 3.11.4 (tags/v3.11.4:d2340ef, Jun  7 2023, 05:45:37) [MSC v.1934 64 bit (AMD64)]"
+      ],
+      "module": "ARUBAWIRED-CHASSIS-MIB"
+    }
+  ]
+}
