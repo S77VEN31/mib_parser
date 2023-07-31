@@ -12,7 +12,7 @@ def build_tree(data, root):
     }
 
     for key, value in data.items():
-        if key != root and value.get("oid", "").startswith(data[root]["oid"]):
+        if key != root and value.get("oid", "").startswith(data[root]["oid"]) and value["oid"][len(data[root]["oid"])] == ".":
             subtree = build_tree(data, key)
             if subtree is not None:
                 tree["children"].append(subtree)
@@ -28,18 +28,14 @@ data_json = data_json.replace("\\", "")
 data = json.loads(data_json)
 
 # Define the root node (can be any of the keys in the dictionary)
-root_node = "arubaWiredSwitchFanTrayJL761A"
+root_node = "wndDeviceIds"
 
 # Build the tree
 tree = build_tree(data, root_node)
 
-# Collect the ignored objects
-ignored = [data[key] for key in data if "oid" not in data[key]]
-
 # Prepare the result
 result = {
-    "tree": tree,
-    "ignored": ignored
+    "tree": tree
 }
 
 # Convert the result to JSON
@@ -53,4 +49,4 @@ with open(output_file, "w") as file:
     file.write(result_json)
 
 # Print the result (optional)
-#print(result_json)
+# print(result_json)
