@@ -10,6 +10,7 @@ def build_tree(data, root, processed=set()):
         "name": data[root].get("name", ""),
         "oid": data[root].get("oid", ""),
         "class": data[root].get("class", ""),
+        "description": data[root].get("description", ""),
         "children": []
     }
     
