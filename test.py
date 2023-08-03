@@ -48,7 +48,7 @@ result = {
 result_json = json.dumps(result, indent=2)
 
 # Define the output file name
-output_file = input_file.replace(".json", "_output.json")
+output_file = input_file.replace(".json", "_tree.json")
 
 # Write the result to the output JSON file
 with open(output_file, "w") as file:
